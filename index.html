@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="utf-8">
         <title>Number Guessr</title>
         <script>
-            let randNumber = Math.floor(Math.random() * 999) + 1;
+            window.onload = function refresh () {
+                // display random number on page
+                let randNumber = Math.floor(Math.random() * 999) + 1;
+                document.getElementById("RandomNumber").innerHTML = randNumber;
+            };
+            
             const guessCount = 10;
             document.getElementById("GuessCount").innerHTML = guessCount -= 1;
         </script>
         <style>
+            html {
+                font-family: Calibri, 'Trebuchet MS', sans-serif;
+            }
+
             #GuessCount {
                 color: green;
             }
@@ -18,11 +28,12 @@
         <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b id="GuessCount">10</b> guesses.</p>
         <div class="form">
             <label for="guessField">Enter Guess:</label>
-            <input type="number" min="1" max="999" class="guessField">
+            <input type="number" min="1" max="999" required id="guessField" class="guessField">
             <input type="submit" value="Guess" class="submitGuess">
         </div>
         <div>
             <button>Play Again!</button>
         </div>
+        <h4 id="RandomNumber"></h4>
     </body>
 </html>
