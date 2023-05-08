@@ -5,6 +5,7 @@
         <script>
             let randNumber = Math.floor(Math.random() * 999) + 1;
             const guessCount = 10;
+            document.getElementById("GuessCount").innerHTML = guessCount -= 1;
         </script>
         <style>
             #GuessCount {
@@ -17,9 +18,8 @@
         <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b id="GuessCount">10</b> guesses.</p>
         <div class="form">
             <label for="guessField">Enter Guess:</label>
-            <div></div>
             <input type="number" min="1" max="999" class="guessField">
-            <input type="submit">
+            <input type="submit" value="Guess" class="submitGuess">
         </div>
         <div>
             <button>Play Again!</button>
