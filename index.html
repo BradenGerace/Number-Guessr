@@ -6,39 +6,7 @@
         <meta name="author" content="Braden Gerace">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Number Guessr</title>
-        <script>
-            window.onload = function newGame () {
-                // display random number on page
-                let randNumber = Math.floor(Math.random() * 999) + 1;
-                let guessCount = 10;
-                let resetButton;
-                let guessesMade = 0;
-                const guesses = document.querySelector(".guesses");
-                const previousGuess = document.querySelector("PreviousGuess");
-                const submitGuess = document.querySelector(".SubmitGuess");
-                document.getElementById("RandomNumber").innerHTML = randNumber;
-                document.getElementById("GuessCount").innerHTML = guessCount; 
-                document.getElementById("DisplayGuesses").innerHTML = guessCount -= 1; 
-            };
-            function darkMode() {
-                var element = document.body;
-                element.classList.toggle("dark-mode");
-            };
-
-            function checkGuess () {
-                const userGuess = Number(guessField.value);
-                if (userGuess === randNumber) {
-                    document.querySelector("PreviousGuess").innerHTML = "You Win!";
-                }
-                document.getElementById("GuessCount").innerHTML = " " + guessCount-1;
-            }
-            SubmitGuess.addEventListener("click", checkGuess);
-
-            function setGameOver() {
-
-            }
-                   
-        </script>
+        
         <style>
             html {
                 font-family: Calibri, 'Trebuchet MS', sans-serif;
@@ -68,21 +36,61 @@
         <h1>Number <b class="red">Guessr</b></h1>
         <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b class="red" id="GuessCount">10</b> guesses.</p>
         <div class="form">
-            <label for="guessField">Enter Guess:</label>
+            <label for="GuessField">Enter Guess:</label>
             <input type="number" min="1" max="999" required id="GuessField" class="GuessField">
-            <input type="submit" value="Guess" class="SubmitGuess" onclick="checkGuess()">
+            <input type="submit" value="Guess" class="SubmitGuess" onsubmit="checkGuess()">
         </div>
         <div>
             <button onclick="window.location.reload()">Play Again!</button>
             <button class="dark-mode" onclick="darkMode()">Dark Mode</button>
         </div>
         <div class="resultParagraphs">
-            <p class="GuessesRemaining"></p>
-            <p class="PreviousGuess"></p>
-            <p class="LowerOrHigher"></p>
+            <p id="GuessesRemaining"></p>
+            <p id="PreviousGuess"></p>
+            <p id="LowerOrHigher"></p>
         </div>
         <!--Temporary-->
         <h4 id="RandomNumber"></h4>
         <h4 id="DisplayGuesses"></h4>
+        <script>
+            // document.addEventListener("DOMContentLoaded");
+            window.onload = function newGame () {
+                // display random number on page
+                let randNumber = Math.floor(Math.random() * 999) + 1;
+                let guessCount = 10;
+                let resetButton;
+                let guessesMade = 0;
+                const guesses = document.querySelector(".guesses");
+                const previousGuess = document.querySelector("PreviousGuess");
+                const submitGuess = document.querySelector(".SubmitGuess");
+                document.getElementById("RandomNumber").innerHTML = randNumber;
+                document.getElementById("GuessCount").innerHTML = guessCount; 
+                document.getElementById("DisplayGuesses").innerHTML = guessCount -= 1;
+                document.getElementById("PreviousGuess").innerHTML = "You Win!";
+            };
+            function darkMode() {
+                var element = document.body;
+                element.classList.toggle("dark-mode");
+            };
+
+            document.getElementById("SubmitGuess").onsubmit = checkGuess();
+
+            function checkGuess () {
+                document.getElementById("GuessField").innerHTML = "";
+                guessCount -= 1;
+                document.querySelector("GuessCount") = guessCount;
+                let userGuess = Number(guessField.value);
+                if (userGuess === randNumber) {
+                    document.querySelector("PreviousGuess").innerHTML = "You Win!";
+                }
+                document.getElementById("GuessCount").innerHTML = " " + guessCount-1;
+            }
+            SubmitGuess.addEventListener("click", checkGuess);
+
+            function setGameOver() {
+
+            }
+                   
+        </script>
     </body>
 </html>
