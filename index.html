@@ -32,8 +32,9 @@
                 if (userGuess === randNumber) {
                     document.querySelector("PreviousGuess").innerHTML = "You Win!";
                 }
+                document.getElementById("GuessCount").innerHTML = " " + guessCount-1;
             }
-            submitGuess.addEventListener("click", checkGuess);
+            SubmitGuess.addEventListener("click", checkGuess);
 
             function setGameOver() {
 
