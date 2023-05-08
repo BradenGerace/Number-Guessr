@@ -4,36 +4,55 @@
         <meta charset="utf-8">
         <title>Number Guessr</title>
         <script>
-            window.onload = function refresh () {
+            window.onload = function newGame () {
                 // display random number on page
                 let randNumber = Math.floor(Math.random() * 999) + 1;
+                let guessCount = 10;
                 document.getElementById("RandomNumber").innerHTML = randNumber;
+                document.getElementById("GuessCount").innerHTML = guessCount; 
+                document.getElementById("DisplayGuesses").innerHTML = guessCount -= 1; 
             };
-            
-            const guessCount = 10;
-            document.getElementById("GuessCount").innerHTML = guessCount -= 1;
+            function darkMode() {
+                var element = document.body;
+                element.classList.toggle("dark-mode");
+            };
+                   
         </script>
         <style>
             html {
                 font-family: Calibri, 'Trebuchet MS', sans-serif;
             }
-
-            #GuessCount {
-                color: green;
+            .red {
+                color: red;
             }
+            body {
+                padding: 8px;
+                text-align: center;
+                background-color: white;
+                color: black;
+                font-size: 18px;
+              }
+              
+              .dark-mode {
+                background-color: black;
+                color: white;
+              }
         </style>
     </head>
     <body>
-        <h1>Number Guessr</h1>
-        <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b id="GuessCount">10</b> guesses.</p>
+        <h1>Number <b class="red">Guessr</b></h1>
+        <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b class="red" id="GuessCount">10</b> guesses.</p>
         <div class="form">
             <label for="guessField">Enter Guess:</label>
             <input type="number" min="1" max="999" required id="guessField" class="guessField">
             <input type="submit" value="Guess" class="submitGuess">
         </div>
         <div>
-            <button>Play Again!</button>
+            <button onclick="window.location.reload()">Play Again!</button>
+            <button class="dark-mode" onclick="darkMode()">Dark Mode</button>
         </div>
+        
         <h4 id="RandomNumber"></h4>
+        <h4 id="DisplayGuesses"></h4>
     </body>
 </html>
