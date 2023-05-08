@@ -43,20 +43,21 @@
                 color: red;
             }
             body {
-                padding: 8px;
-                text-align: center;
-                background-color: white;
-                color: black;
-                font-size: 18px;
-              }
-              
-              .dark-mode {
-                background-color: black;
-                color: white;
-              }
-              .form input[type="number"] {
-                width: 200px;
-              }
+            padding: 8px;
+            text-align: center;
+            background-color: white;
+            color: black;
+            font-size: 18px;
+            }
+            
+            .dark-mode {
+            background-color: black;
+            color: white;
+            }
+            .form input[type="number"] {
+            width: 200px;
+            }
+
         </style>
     </head>
     <body>
@@ -71,7 +72,7 @@
             <button onclick="window.location.reload()">Play Again!</button>
             <button class="dark-mode" onclick="darkMode()">Dark Mode</button>
         </div>
-        <div>
+        <div class="resultParagraphs">
             <p class="GuessesRemaining"></p>
             <p class="PreviousGuess"></p>
             <p class="LowerOrHigher"></p>
