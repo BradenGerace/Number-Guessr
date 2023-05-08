@@ -5,8 +5,7 @@
         <meta name="description" content="Guess the number game!">
         <meta name="author" content="Braden Gerace">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Number Guessr</title>
-        
+        <title>Number Guessr</title>     
         <style>
             html {
                 font-family: Calibri, 'Trebuchet MS', sans-serif;
@@ -21,7 +20,6 @@
             color: black;
             font-size: 18px;
             }
-            
             .dark-mode {
             background-color: black;
             color: white;
@@ -29,7 +27,6 @@
             .form input[type="number"] {
             width: 200px;
             }
-
         </style>
     </head>
     <body>
@@ -37,7 +34,7 @@
         <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b class="red" id="GuessCount">10</b> guesses.</p>
         <div class="form">
             <label for="GuessField">Enter Guess:</label>
-            <input type="number" min="1" max="999" required id="GuessField" class="GuessField">
+            <input type="number" min="1" max="999" id="GuessField" class="GuessField" required>
             <input type="submit" value="Guess" class="SubmitGuess" onsubmit="checkGuess()">
         </div>
         <div>
@@ -60,20 +57,21 @@
                 let guessCount = 10;
                 let resetButton;
                 let guessesMade = 0;
-                const guesses = document.querySelector(".guesses");
-                const previousGuess = document.querySelector("PreviousGuess");
-                const submitGuess = document.querySelector(".SubmitGuess");
+                let guesses = document.querySelector(".guesses");
+                let previousGuess = document.querySelector("PreviousGuess");
+                let submitGuess = document.querySelector(".SubmitGuess");
                 document.getElementById("RandomNumber").innerHTML = randNumber;
                 document.getElementById("GuessCount").innerHTML = guessCount; 
-                document.getElementById("DisplayGuesses").innerHTML = guessCount -= 1;
+                document.getElementById("DisplayGuesses").innerHTML = guessCount;
                 document.getElementById("PreviousGuess").innerHTML = "You Win!";
+                document.getElementById("GuessCount").innerHTML = "" + guessCount;
             };
             function darkMode() {
                 var element = document.body;
                 element.classList.toggle("dark-mode");
             };
 
-            document.getElementById("SubmitGuess").onsubmit = checkGuess();
+            document.getElementById("GuessField").onsubmit = checkGuess();
 
             function checkGuess () {
                 document.getElementById("GuessField").innerHTML = "";
@@ -83,7 +81,7 @@
                 if (userGuess === randNumber) {
                     document.querySelector("PreviousGuess").innerHTML = "You Win!";
                 }
-                document.getElementById("GuessCount").innerHTML = " " + guessCount-1;
+                
             }
             SubmitGuess.addEventListener("click", checkGuess);
 
