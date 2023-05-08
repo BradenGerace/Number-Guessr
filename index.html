@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Number Guessr</title>
         <script>
-            
             window.onload = function newGame () {
                 // display random number on page
                 let randNumber = Math.floor(Math.random() * 999) + 1;
@@ -25,7 +24,6 @@
                 var element = document.body;
                 element.classList.toggle("dark-mode");
             };
-            const guesses = document.querySelector(".GuessesRemaining");
 
             function checkGuess () {
                 const userGuess = Number(guessField.value);
@@ -72,7 +70,7 @@
         <div class="form">
             <label for="guessField">Enter Guess:</label>
             <input type="number" min="1" max="999" required id="GuessField" class="GuessField">
-            <input type="submit" value="Guess" class="SubmitGuess">
+            <input type="submit" value="Guess" class="SubmitGuess" onclick="checkGuess()">
         </div>
         <div>
             <button onclick="window.location.reload()">Play Again!</button>
@@ -83,6 +81,7 @@
             <p class="PreviousGuess"></p>
             <p class="LowerOrHigher"></p>
         </div>
+        <!--Temporary-->
         <h4 id="RandomNumber"></h4>
         <h4 id="DisplayGuesses"></h4>
     </body>
