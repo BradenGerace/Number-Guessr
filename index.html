@@ -31,14 +31,14 @@
     </head>
     <body>
         <h1>Number <b class="red">Guessr</b></h1>
-        <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b class="red" id="GuessCount">10</b> guesses.</p>
+        <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b class="red" id="guessCount">10</b> guesses.</p>
         <div class="form">
             <label for="GuessField">Enter Guess:</label>
             <input type="number" min="1" max="999" id="guessField" class="guessField" required pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" oninput="this.value = Math.abs(this.value)">
             <input type="submit" value="Guess" class="guessSubmit" id="guessSubmit">
         </div>
         <div>
-            <button onclick="window.location.reload()">Play Again!</button>
+            <button onclick="resetGame()">Play Again!</button>
             <button class="dark-mode" onclick="darkMode()">Dark Mode</button>
         </div>
         <div class="resultParas">
@@ -63,6 +63,12 @@
 
             function checkGuess() {
                 const userGuess = Number(guessField.value);
+                if (userGuess <= 0) {
+                    return;
+                }
+                /* if (userGuess === guesses) {
+                    return;
+                } */
                 if (guessCount === 1) {
                 guesses.textContent = 'Previous guesses: ';
                 }
@@ -75,7 +81,7 @@
                 lowOrHi.textContent = '';
                 setGameOver();
                 } else if (guessCount === 10) {
-                lastResult.textContent = '!!!GAME OVER!!!';
+                lastResult.textContent = 'GAME OVER!!!';
                 lowOrHi.textContent = '';
                 setGameOver();
                 } else {
@@ -89,6 +95,8 @@
                 }
 
                 guessCount++;
+                var remainingGuesses = document.getElementById("GuessCount");
+                remainingGuesses = guessCount;
                 guessField.value = '';
                 guessField.focus();
             }
@@ -117,7 +125,7 @@
                 guessField.value = '';
                 guessField.focus();
                 lastResult.style.backgroundColor = 'white';
-                randomNumber = Math.floor(Math.random() * 100) + 1;
+                randomNumber = Math.floor(Math.random() * 999) + 1;
             }
             function darkMode() {
                 var element = document.body;
