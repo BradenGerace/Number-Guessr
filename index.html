@@ -34,61 +34,95 @@
         <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b class="red" id="GuessCount">10</b> guesses.</p>
         <div class="form">
             <label for="GuessField">Enter Guess:</label>
-            <input type="number" min="1" max="999" id="GuessField" class="GuessField" required>
-            <input type="submit" value="Guess" class="SubmitGuess" onsubmit="checkGuess()">
+            <input type="number" min="1" max="999" id="guessField" class="guessField" required pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" oninput="this.value = Math.abs(this.value)">
+            <input type="submit" value="Guess" class="guessSubmit">
         </div>
         <div>
             <button onclick="window.location.reload()">Play Again!</button>
             <button class="dark-mode" onclick="darkMode()">Dark Mode</button>
         </div>
-        <div class="resultParagraphs">
-            <p id="GuessesRemaining"></p>
-            <p id="PreviousGuess"></p>
-            <p id="LowerOrHigher"></p>
+        <div class="resultParas">
+            <p class="guesses"></p>
+            <p class="lastResult"></p>
+            <p class="lowOrHi"></p>
         </div>
         <!--Temporary-->
         <h4 id="RandomNumber"></h4>
         <h4 id="DisplayGuesses"></h4>
         <script>
-            // document.addEventListener("DOMContentLoaded");
-            window.onload = function newGame () {
-                // display random number on page
-                let randNumber = Math.floor(Math.random() * 999) + 1;
-                let guessCount = 10;
-                let resetButton;
-                let guessesMade = 0;
-                let guesses = document.querySelector(".guesses");
-                let previousGuess = document.querySelector("PreviousGuess");
-                let submitGuess = document.querySelector(".SubmitGuess");
-                document.getElementById("RandomNumber").innerHTML = randNumber;
-                document.getElementById("GuessCount").innerHTML = guessCount; 
-                document.getElementById("DisplayGuesses").innerHTML = guessCount;
-                document.getElementById("PreviousGuess").innerHTML = "You Win!";
-                document.getElementById("GuessCount").innerHTML = "" + guessCount;
-            };
+            // document.addEventListener("DOMContentLoaded");   
+            
+            let randomNumber = Math.floor(Math.random() * 999) + 1;
+            const guesses = document.querySelector('.guesses');
+            const lastResult = document.querySelector('.lastResult');
+            const lowOrHi = document.querySelector('.lowOrHi');
+            const guessSubmit = document.querySelector('.guessSubmit');
+            const guessField = document.querySelector('.guessField');
+            let guessCount = 1;
+            let resetButton;
+
+            function checkGuess() {
+                const userGuess = Number(guessField.value);
+                if (guessCount === 1) {
+                guesses.textContent = 'Previous guesses: ';
+                }
+
+                guesses.textContent += userGuess + ' ';
+
+                if (userGuess === randomNumber) {
+                lastResult.textContent = 'Congratulations! You got it right!';
+                lastResult.style.backgroundColor = 'lime';
+                lowOrHi.textContent = '';
+                setGameOver();
+                } else if (guessCount === 10) {
+                lastResult.textContent = '!!!GAME OVER!!!';
+                lowOrHi.textContent = '';
+                setGameOver();
+                } else {
+                lastResult.textContent = 'Wrong!';
+                lastResult.style.backgroundColor = 'red';
+                if(userGuess < randomNumber) {
+                    lowOrHi.textContent = 'Last guess was too low!' ;
+                } else if(userGuess > randomNumber) {
+                    lowOrHi.textContent = 'Last guess was too high!';
+                }
+                }
+
+                guessCount++;
+                guessField.value = '';
+                guessField.focus();
+            }
+
+            guessSubmit.addEventListener('click', checkGuess);
+
+            function setGameOver() {
+                guessField.disabled = true;
+                guessSubmit.disabled = true;
+                resetButton = document.createElement('button');
+                resetButton.textContent = 'Start new game';
+                document.body.appendChild(resetButton);
+                resetButton.addEventListener('click', resetGame);
+            }
+
+            function resetGame() {
+                guessCount = 1;
+                const resetParas = document.querySelectorAll('.resultParas p');
+                for (const resetPara of resetParas) {
+                resetPara.textContent = '';
+                }
+
+                resetButton.parentNode.removeChild(resetButton);
+                guessField.disabled = false;
+                guessSubmit.disabled = false;
+                guessField.value = '';
+                guessField.focus();
+                lastResult.style.backgroundColor = 'white';
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+            }
             function darkMode() {
                 var element = document.body;
                 element.classList.toggle("dark-mode");
-            };
-
-            document.getElementById("GuessField").onsubmit = checkGuess();
-
-            function checkGuess () {
-                document.getElementById("GuessField").innerHTML = "";
-                guessCount -= 1;
-                document.querySelector("GuessCount") = guessCount;
-                let userGuess = Number(guessField.value);
-                if (userGuess === randNumber) {
-                    document.querySelector("PreviousGuess").innerHTML = "You Win!";
-                }
-                
-            }
-            SubmitGuess.addEventListener("click", checkGuess);
-
-            function setGameOver() {
-
-            }
-                   
+            };         
         </script>
     </body>
 </html>
