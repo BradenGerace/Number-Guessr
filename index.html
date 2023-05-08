@@ -2,8 +2,21 @@
 <html lang="en">
     <head>
         <title>Number Guessr</title>
+        <script>
+            let randNumber = Math.floor(Math.random() * 999) + 1;
+        </script>
+        <style>
+            #GuessCount {
+                color: green;
+            }
+        </style>
     </head>
     <body>
-
+        <h1>Number Guessr</h1>
+        <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b id="GuessCount">10</b> guesses.</p>
+        <input type="number">
+        <input type="submit">
+        <div></div>
+        <button>Play Again!</button>
     </body>
 </html>
