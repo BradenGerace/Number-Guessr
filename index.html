@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Number Guessr</title>
         <script>
+
             window.onload = function newGame () {
                 // display random number on page
                 let randNumber = Math.floor(Math.random() * 999) + 1;
@@ -20,6 +21,17 @@
                 element.classList.toggle("dark-mode");
             };
             const guesses = document.querySelector(".GuessesRemaining");
+
+            function checkGuess () {
+                const userGuess = Number(guessField.value);
+                if (userGuess === randNumber) {
+                    document.querySelector("PreviousGuess").innerHTML = "You Win!";
+                }
+            }
+
+            function setGameOver() {
+
+            }
                    
         </script>
         <style>
