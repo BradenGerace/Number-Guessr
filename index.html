@@ -43,9 +43,7 @@
         </div>
         <div>
             <button class="light-mode" onclick="resetGame()">Play Again!</button>
-            <div id="theme">
-                <button id="dark-mode" class="dark-mode" onclick="darkMode()" value="Dark Mode">Dark Mode</button>
-            </div>
+            <button id="dark-mode" class="dark-mode" onclick="darkMode()" value="Dark Mode">Dark Mode</button>
         </div>
         <div class="resultParas">
             <p class="guesses"></p>
@@ -157,8 +155,8 @@
                 
                 
             };
+            // Get input field and store as variable
             var input = document.getElementById("guessField");
-
             // Execute a function when the user presses a key on the keyboard
             input.addEventListener("keypress", function(event) {
             // If the user presses the "Enter" key on the keyboard
@@ -169,7 +167,7 @@
                 document.getElementById("guessSubmit").click();
                 }
             });
-            document.getElementById('dark-mode').value = localStorage.getItem('darkOrLight');
+            /* document.getElementById('dark-mode').value = localStorage.getItem('darkOrLight');
             
             window.onload = function PageMode() {
                 let onpageLoad = localStorage.getItem("dark-mode") || "";
@@ -190,7 +188,7 @@
                 }
               
                 document.getElementById("theme").textContent = localStorage.getItem("theme");
-              }
+              } */
         </script>
     </body>
 </html>
