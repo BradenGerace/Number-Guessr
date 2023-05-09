@@ -33,7 +33,7 @@
             }
         </style>
     </head>
-    <body>
+    <body onload="PageMode()">
         <h1>Number <b class="red">Guessr</b></h1>
         <p>I am thinking of a number between 1 and 999. I will say if it's lower or higher than your previous guess. You have <b class="red" id="guessCount">10</b> guesses.</p>
         <div class="form">
@@ -69,8 +69,6 @@
             let totalGuesses = 10;
             document.getElementById("guessCount").innerHTML = "" + totalGuesses;
             
-            
-
             function checkGuess() {
                 let userGuess = Number(guessField.value);
                 document.getElementById("guessCount").innerHTML = "" + (totalGuesses-guessCount);
@@ -100,9 +98,9 @@
                     lastResult.textContent = 'Wrong!';
                     lastResult.style.backgroundColor = 'red';
                     if(userGuess < randomNumber) {
-                        lowOrHi.textContent = 'Last guess was too low!' ;
+                        lowOrHi.textContent = 'Higher!' ;
                     } else if(userGuess > randomNumber) {
-                        lowOrHi.textContent = 'Last guess was too high!';
+                        lowOrHi.textContent = 'Lower!';
                     }
                 }
 
@@ -129,6 +127,7 @@
                 resetPara.textContent = '';
                 let totalGuesses = 10;
                 document.getElementById("guessCount").innerHTML = "" + totalGuesses;
+                document.getElementById('dark-mode').value = localStorage.getItem('darkOrLight');
                 }
 
                 resetButton.parentNode.removeChild(resetButton);
@@ -146,11 +145,14 @@
                 if (elem.textContent=="Dark Mode") {
                     elem.textContent = "Light Mode";
                     elem.className = "light-mode";
+                    var darkOrLightMode = localStorage.setItem("darkOrLight", elem.val());
                 }
                 else {
                     elem.textContent = "Dark Mode";
                     elem.className = "dark-mode";
+                    var darkOrLightMode = localStorage.setItem("darkOrLight", elem.val());
                 }
+                
             };
             var input = document.getElementById("guessField");
 
@@ -163,7 +165,16 @@
                 // Trigger the button element with a click
                 document.getElementById("guessSubmit").click();
                 }
-            });       
+            });
+            document.getElementById('dark-mode').value = localStorage.getItem('darkOrLight');
+            
+            window.onload = function PageMode() {
+                var pageMode = document.getElementById('dark-mode').value;
+                localStorage.setItem("DarkMode", pageMode);
+
+                var pageMode = localStorage.getItem("DarkMode");
+                document.getElementById("dark-mode").value = pageMode;
+            }
         </script>
     </body>
 </html>
