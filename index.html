@@ -123,6 +123,8 @@
                 const resetParas = document.querySelectorAll('.resultParas p');
                 for (const resetPara of resetParas) {
                 resetPara.textContent = '';
+                let totalGuesses = 10;
+                document.getElementById("guessCount").innerHTML = "" + totalGuesses;
                 }
 
                 resetButton.parentNode.removeChild(resetButton);
