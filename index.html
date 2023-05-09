@@ -68,7 +68,7 @@
             let resetButton;
             let totalGuesses = 10;
             document.getElementById("guessCount").innerHTML = "" + totalGuesses;
-            
+
             function checkGuess() {
                 let userGuess = Number(guessField.value);
                 document.getElementById("guessCount").innerHTML = "" + (totalGuesses-guessCount);
@@ -151,9 +151,7 @@
                     elem.textContent = "Dark Mode";
                     elem.className = "dark-mode";
                     var darkOrLightMode = localStorage.setItem("darkOrLight", elem.val());
-                }
-                
-                
+                }     
             };
             // Get input field and store as variable
             var input = document.getElementById("guessField");
