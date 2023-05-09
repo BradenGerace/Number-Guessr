@@ -45,6 +45,7 @@
             <p class="guesses"></p>
             <p class="lastResult"></p>
             <p class="lowOrHi"></p>
+            <p class="answer"></p>
         </div>
         <!--Temporary-->
         <h4 id="RandomNumber"></h4>
@@ -58,6 +59,7 @@
             const lowOrHi = document.querySelector('.lowOrHi');
             const guessSubmit = document.querySelector('.guessSubmit');
             const guessField = document.querySelector('.guessField');
+            const answer = document.querySelector(".answer");
             let guessCount = 1;
             let resetButton;
             let totalGuesses = 10;
@@ -67,6 +69,7 @@
 
             function checkGuess() {
                 let userGuess = Number(guessField.value);
+                document.getElementById("guessCount").innerHTML = "" + (totalGuesses-guessCount);
                 if (userGuess <= 0) {
                     return;
                 }
@@ -87,6 +90,7 @@
                     } else if (guessCount === 10) {
                     lastResult.textContent = 'Game over!';
                     lowOrHi.textContent = '';
+                    answer.textContent = "The number was: " + randomNumber;
                     setGameOver();
                     } else {
                     lastResult.textContent = 'Wrong!';
@@ -96,7 +100,6 @@
                     } else if(userGuess > randomNumber) {
                         lowOrHi.textContent = 'Last guess was too high!';
                     }
-                    document.getElementById("guessCount").innerHTML = "" + (totalGuesses-guessCount);
                 }
 
                 guessCount++;
