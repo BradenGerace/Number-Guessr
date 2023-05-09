@@ -16,13 +16,17 @@
             body {
             padding: 8px;
             text-align: center;
-            background-color: white;
+            background-color: gainsboro;
             color: black;
             font-size: 18px;
             }
             .dark-mode {
             background-color: black;
             color: white;
+            }
+            .light-mode {
+            background-color: gainsboro;
+            color: black;
             }
             .form input[type="number"] {
             width: 200px;
@@ -38,8 +42,8 @@
             <input type="submit" value="Guess" class="guessSubmit" id="guessSubmit">
         </div>
         <div>
-            <button onclick="resetGame()">Play Again!</button>
-            <button class="dark-mode" onclick="darkMode()">Dark Mode</button>
+            <button class="light-mode" onclick="resetGame()">Play Again!</button>
+            <button id="dark-mode" class="dark-mode" onclick="darkMode()" value="Dark Mode">Dark Mode</button>
         </div>
         <div class="resultParas">
             <p class="guesses"></p>
@@ -138,6 +142,15 @@
             function darkMode() {
                 var element = document.body;
                 element.classList.toggle("dark-mode");
+                var elem = document.getElementById("dark-mode");
+                if (elem.textContent=="Dark Mode") {
+                    elem.textContent = "Light Mode";
+                    elem.className = "light-mode";
+                }
+                else {
+                    elem.textContent = "Dark Mode";
+                    elem.className = "dark-mode";
+                }
             };
             var input = document.getElementById("guessField");
 
