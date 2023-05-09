@@ -43,7 +43,9 @@
         </div>
         <div>
             <button class="light-mode" onclick="resetGame()">Play Again!</button>
-            <button id="dark-mode" class="dark-mode" onclick="darkMode()" value="Dark Mode">Dark Mode</button>
+            <div id="theme">
+                <button id="dark-mode" class="dark-mode" onclick="darkMode()" value="Dark Mode">Dark Mode</button>
+            </div>
         </div>
         <div class="resultParas">
             <p class="guesses"></p>
@@ -153,6 +155,7 @@
                     var darkOrLightMode = localStorage.setItem("darkOrLight", elem.val());
                 }
                 
+                
             };
             var input = document.getElementById("guessField");
 
@@ -169,12 +172,25 @@
             document.getElementById('dark-mode').value = localStorage.getItem('darkOrLight');
             
             window.onload = function PageMode() {
-                var pageMode = document.getElementById('dark-mode').value;
-                localStorage.setItem("DarkMode", pageMode);
-
-                var pageMode = localStorage.getItem("DarkMode");
-                document.getElementById("dark-mode").value = pageMode;
-            }
+                let onpageLoad = localStorage.getItem("dark-mode") || "";
+                let element = document.body;
+                element.classList.add(onpageLoad);
+                document.getElementById("dark-mode").textContent =
+                localStorage.getItem("dark-mode") || "light";
+              }();
+              function themeToggle() {
+                let element = document.body;
+                element.classList.toggle("dark-mode");
+              
+                let theme = localStorage.getItem("theme");
+                if (theme && theme === "dark-mode") {
+                  localStorage.setItem("theme", "");
+                } else {
+                  localStorage.setItem("theme", "dark-mode");
+                }
+              
+                document.getElementById("theme").textContent = localStorage.getItem("theme");
+              }
         </script>
     </body>
 </html>
