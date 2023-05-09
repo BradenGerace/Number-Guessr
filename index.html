@@ -31,7 +31,7 @@
     </head>
     <body>
         <h1>Number <b class="red">Guessr</b></h1>
-        <p>Guess a number between 1 and 999. We will say if it's lower or higher than your previous guess. You have <b class="red" id="guessCount">10</b> guesses.</p>
+        <p>I am thinking of a number between 1 and 999. I will say if it's lower or higher than your previous guess. You have <b class="red" id="guessCount">10</b> guesses.</p>
         <div class="form">
             <label for="GuessField">Enter Guess:</label>
             <input type="number" min="1" max="999" id="guessField" class="guessField" required pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" oninput="this.value = Math.abs(this.value)">
